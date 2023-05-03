@@ -1,0 +1,6 @@
+---
+
+excluded_packages:
+  - linux-image-generic
+
+# defaults file for updating_ubuntu

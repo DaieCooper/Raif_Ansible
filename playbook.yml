@@ -1,0 +1,8 @@
+---
+
+- name: Update Ubuntu
+  hosts: servers
+  become: true
+  roles:
+    - updating_ubuntu
+

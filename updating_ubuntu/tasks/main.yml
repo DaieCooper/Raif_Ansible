@@ -1,0 +1,21 @@
+---
+
+- name: Updating all packages
+  apt: 
+    upgrade: dist
+    autoremove: yes
+    autoclean: yes 
+  register: apt_update
+
+- name: Reboot if packages were updated
+  when: apt_update is defined and apt_update.reboot_required | default(false) | bool
+  reboot:
+
+- name: Remove all packages
+  apt:
+    name: "{{ item }}"
+    state: absent
+  with_items: "{{ ansible_facts['kernel'][:-2] }}"
+  when: ansible_facts['kernel'] | length > 2
+
+# tasks file for updating_ubuntu
